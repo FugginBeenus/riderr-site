@@ -6,22 +6,93 @@
   <title>Riderr – Motorcycle Maintenance App</title>
   <meta name="description" content="Track service history, get reminders, and keep your bike running at its best. Coming soon to iOS.">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #5AC87A;
+      --green-dark: #3da85e;
+      --black: #111;
+      --gray-bg: #F3F3F3;
+      --dark-bg: #111;
+      --card-bg: #fff;
+      --text-muted: #777;
+      --border: #E8E8E8;
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-      background: #F3F3F3;
-      color: #111;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: var(--gray-bg);
+      color: var(--black);
     }
 
-    .page {
-      flex: 1;
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(243,243,243,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .nav-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      padding: 9px 20px;
+      background: var(--black);
+      color: #fff !important;
+      border-radius: 10px;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #333 !important; color: #fff !important; }
+
+    /* ─── SECTIONS ────────────────────────────────────── */
+    section { width: 100%; }
 
     .container {
       max-width: 1280px;
@@ -30,8 +101,16 @@
       width: 100%;
     }
 
-    /* Two-column hero */
-    .hero {
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--gray-bg);
+      padding-top: 80px;
+    }
+
+    .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
@@ -45,11 +124,10 @@
       gap: 28px;
     }
 
-    /* App badge */
     .app-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .app-icon {
@@ -66,53 +144,50 @@
       letter-spacing: -0.01em;
     }
 
-    /* Headline */
-    .headline {
+    .hero-headline {
       font-size: 66px;
       font-weight: 800;
       line-height: 1.06;
       letter-spacing: -0.03em;
     }
 
-    .headline .highlight { color: #5AC87A; }
+    .hero-headline .highlight { color: var(--green); }
 
-    /* Subtitle */
-    .subtitle {
+    .hero-sub {
       font-size: 20px;
-      color: #666;
+      color: var(--text-muted);
       line-height: 1.65;
       max-width: 460px;
     }
 
-    /* Form */
     .form-wrap { display: flex; flex-direction: column; gap: 12px; }
 
     .form-row {
       display: flex;
       gap: 8px;
-      max-width: 440px;
+      max-width: 460px;
     }
 
     .email-input {
       flex: 1;
-      padding: 14px 18px;
-      border: 1.5px solid #E0E0E0;
+      padding: 15px 18px;
+      border: 1.5px solid var(--border);
       border-radius: 14px;
       font-size: 16px;
       font-family: inherit;
       outline: none;
       background: white;
-      color: #111;
+      color: var(--black);
       transition: border-color 0.2s;
       -webkit-appearance: none;
     }
 
-    .email-input:focus { border-color: #5AC87A; }
+    .email-input:focus { border-color: var(--green); }
     .email-input::placeholder { color: #BBB; }
 
     .submit-btn {
-      padding: 14px 22px;
-      background: #111;
+      padding: 15px 24px;
+      background: var(--black);
       color: white;
       border: none;
       border-radius: 14px;
@@ -148,12 +223,8 @@
       flex-shrink: 0;
     }
 
-    .check-circle svg {
-      width: 12px;
-      height: 12px;
-    }
+    .check-circle svg { width: 12px; height: 12px; }
 
-    /* Follow link */
     .follow-link {
       display: inline-flex;
       align-items: center;
@@ -165,15 +236,10 @@
       transition: color 0.2s;
     }
 
-    .follow-link:hover { color: #111; }
+    .follow-link:hover { color: var(--black); }
     .follow-link:hover .arrow { transform: translateX(3px); }
+    .arrow { display: inline-block; transition: transform 0.2s; }
 
-    .arrow {
-      display: inline-block;
-      transition: transform 0.2s;
-    }
-
-    /* Phone mockup */
     .hero-right {
       display: flex;
       justify-content: center;
@@ -188,71 +254,479 @@
       display: block;
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 13px;
-      color: #AAA;
+    /* ─── FEATURE STRIP ───────────────────────────────── */
+    #features {
+      background: #fff;
+      padding: 100px 0;
     }
 
-    footer a {
-      color: #AAA;
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--gray-bg);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover { transform: translateY(-3px); }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: white;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-icon.green { background: var(--green); }
+    .feature-icon.green svg { stroke: white; }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── SPOTLIGHT SECTIONS ─────────────────────────── */
+    .spotlight {
+      padding: 100px 0;
+    }
+
+    .spotlight.dark {
+      background: var(--dark-bg);
+      color: #fff;
+    }
+
+    .spotlight.dark .section-sub { color: #999; }
+    .spotlight.dark .section-title { color: #fff; }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .spotlight-grid.reverse { direction: rtl; }
+    .spotlight-grid.reverse > * { direction: ltr; }
+
+    .spotlight-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .spotlight-img {
+      display: flex;
+      justify-content: center;
+    }
+
+    .spotlight-phone {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 40px;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.25));
+    }
+
+    .dark .spotlight-phone {
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+    }
+
+    /* Feature bullets */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      list-style: none;
+      color: var(--text-muted);
+    }
+
+    .dark .feature-list li { color: #aaa; }
+
+    .feature-list li::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      margin-top: 2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='2,6 5,9 10,3'/%3E%3C/svg%3E");
+      background-size: 11px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ─── PRICING ─────────────────────────────────────── */
+    #pricing {
+      padding: 100px 0;
+      background: var(--gray-bg);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1.5px solid var(--border);
+    }
+
+    .pricing-card.featured {
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+    }
+
+    .pricing-tier {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card.featured .pricing-tier { color: var(--green); }
+
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-per {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pricing-card.featured .pricing-per { color: #888; }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .pricing-card.featured .pricing-divider { background: #2a2a2a; }
+
+    .pricing-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .pricing-card.featured .pricing-feature { color: #ccc; }
+
+    .pricing-feature .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='2,6 5,9 10,3'/%3E%3C/svg%3E");
+      background-size: 11px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .pricing-feature .dot.muted {
+      background: var(--border);
+      background-image: none;
+    }
+
+    .pricing-card.featured .pricing-feature .dot.muted { background: #333; }
+
+    .pricing-btn {
+      display: block;
+      text-align: center;
+      margin-top: 32px;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
       text-decoration: none;
-      margin: 0 10px;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .pricing-btn.outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--black);
+    }
+
+    .pricing-btn.outline:hover { border-color: #aaa; }
+
+    .pricing-btn.solid {
+      background: var(--green);
+      color: white;
+    }
+
+    .pricing-btn.solid:hover { background: var(--green-dark); }
+
+    /* ─── BOTTOM CTA ──────────────────────────────────── */
+    #cta {
+      background: var(--black);
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cta-title {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .cta-title .highlight { color: var(--green); }
+
+    .cta-sub {
+      font-size: 18px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 15px 18px;
+      border: 1.5px solid #2a2a2a;
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      background: #1a1a1a;
+      color: #fff;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .cta-input:focus { border-color: var(--green); }
+    .cta-input::placeholder { color: #555; }
+
+    .cta-btn {
+      padding: 15px 24px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .cta-btn:hover { background: var(--green-dark); }
+    .cta-btn:active { transform: scale(0.97); }
+
+    .cta-success {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid #1e1e1e;
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: #555;
+      text-decoration: none;
       transition: color 0.2s;
     }
 
-    footer a:hover { color: #555; }
+    .footer-links a:hover { color: #aaa; }
 
-    /* Mobile */
-    @media (max-width: 820px) {
-      .hero {
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .container { padding: 0 28px; }
+
+      .hero-grid, .spotlight-grid, .spotlight-grid.reverse {
         grid-template-columns: 1fr;
         gap: 48px;
-        padding: 60px 0 40px;
+        direction: ltr;
       }
 
-      .container { padding: 0 28px; }
       .hero-right { order: -1; }
-      .phone-mockup { max-width: 250px; border-radius: 36px; }
-      .headline { font-size: 38px; }
-      .form-row { flex-direction: column; }
-      .submit-btn { text-align: center; }
+      .phone-mockup, .spotlight-phone { max-width: 260px; border-radius: 34px; }
+      .hero-headline { font-size: 42px; }
+      .section-title { font-size: 34px; }
+      .cta-title { font-size: 36px; }
+
+      .feature-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+
+      .form-row, .cta-form { flex-direction: column; }
+      .footer-inner { flex-direction: column; gap: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">
+      <img src="assets/logo.png" alt="Riderr" class="nav-icon">
+      <span class="nav-name">Riderr</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+      <a href="#cta" class="nav-cta">Join waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
     <div class="container">
-      <div class="hero">
+      <div class="hero-grid">
 
-        <!-- Left: text + form -->
         <div class="hero-left">
-
           <div class="app-badge">
             <img src="assets/logo.png" alt="Riderr" class="app-icon">
             <span class="app-name">Riderr</span>
           </div>
 
-          <h1 class="headline">The motorcycle<br>maintenance app<br>built for <span class="highlight">every rider.</span></h1>
+          <h1 class="hero-headline">The motorcycle<br>maintenance app<br>built for <span class="highlight">every rider.</span></h1>
 
-          <p class="subtitle">Never miss an oil change, chain service, or tire rotation again. Track your full service history and get reminded when it matters.</p>
+          <p class="hero-sub">Never miss an oil change, chain service, or tire rotation again. Track your full service history and get reminded when it matters.</p>
 
           <div class="form-wrap">
-            <form class="form-row" id="waitlist-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
-              <input
-                type="email"
-                name="email"
-                class="email-input"
-                placeholder="Enter your email"
-                required
-              >
+            <form class="form-row" id="hero-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
+              <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
               <button type="submit" class="submit-btn">Join waitlist</button>
             </form>
-
-            <div class="success-msg" id="success-msg">
+            <div class="success-msg" id="hero-success">
               <div class="check-circle">
                 <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="2,6 5,9 10,3"/>
@@ -271,54 +745,238 @@
               </svg>
             </span>
           </a>
-
         </div>
 
-        <!-- Right: phone mockup -->
         <div class="hero-right">
-          <img src="assets/screenshot.png" alt="Riderr app screenshot" class="phone-mockup">
+          <img src="assets/screenshot.png" alt="Riderr app" class="phone-mockup">
         </div>
 
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Everything your bike needs.</h2>
+      <p class="section-sub">Built for the rider who takes pride in knowing their machine inside and out.</p>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+          </div>
+          <h3 class="feature-title">Service History</h3>
+          <p class="feature-desc">Log every oil change, tire rotation, chain service, and more. Your full maintenance history in one place.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3 class="feature-title">Smart Reminders</h3>
+          <p class="feature-desc">Get notified when service is due — by mileage, time interval, or season. Never let maintenance slip again.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="feature-title">Manual Upload</h3>
+          <p class="feature-desc">Upload your owner's manual as a PDF and Riderr automatically extracts oil type, tire sizes, chain specs, and service intervals.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3 class="feature-title">Recall Alerts</h3>
+          <p class="feature-desc">Automatically checks NHTSA's database for open safety recalls on your bike's make, model, and year.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <h3 class="feature-title">Mods Tracker</h3>
+          <p class="feature-desc">Keep a detailed log of every aftermarket part and upgrade. Know exactly what's on your build at all times.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3 class="feature-title">iCloud Sync</h3>
+          <p class="feature-desc">Premium subscribers get seamless iCloud backup and sync across all their Apple devices. Your data always with you.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SPOTLIGHT: Reminders -->
+  <section class="spotlight dark">
+    <div class="container">
+      <div class="spotlight-grid">
+        <div class="spotlight-text">
+          <p class="section-label">Never miss a service</p>
+          <h2 class="section-title">Reminders that actually work.</h2>
+          <p class="section-sub">Set service intervals by mileage or time. Riderr tracks your odometer and pings you when it's time — whether that's an oil change every 3,000 miles or a valve check every spring.</p>
+          <ul class="feature-list">
+            <li>Mileage-based and time-based reminders</li>
+            <li>Seasonal prep reminders (winterize, de-winterize)</li>
+            <li>Customizable intervals for every service type</li>
+          </ul>
+        </div>
+        <div class="spotlight-img">
+          <img src="assets/screenshot.png" alt="Riderr reminders" class="spotlight-phone">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPOTLIGHT: Manual -->
+  <section class="spotlight" style="background:#fff;">
+    <div class="container">
+      <div class="spotlight-grid reverse">
+        <div class="spotlight-text">
+          <p class="section-label">AI-powered specs</p>
+          <h2 class="section-title">Upload your manual.<br>Get instant specs.</h2>
+          <p class="section-sub">Drop in a PDF of your owner's manual and Riderr reads it for you. Oil viscosity, tire pressures, chain slack, torque specs — all extracted and saved to your bike's profile automatically.</p>
+          <ul class="feature-list">
+            <li>Supports any PDF owner's manual</li>
+            <li>Powered by Claude AI (your own API key)</li>
+            <li>Editable after import — you're always in control</li>
+          </ul>
+        </div>
+        <div class="spotlight-img">
+          <img src="assets/screenshot.png" alt="Riderr manual upload" class="spotlight-phone">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">Pricing</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom:12px;">Simple, honest pricing.</h2>
+      <p class="section-sub" style="text-align:center; margin:0 auto 56px;">Start free. Upgrade when you're ready.</p>
+
+      <div class="pricing-grid">
+
+        <!-- Free -->
+        <div class="pricing-card">
+          <p class="pricing-tier">Free</p>
+          <p class="pricing-price">$0</p>
+          <p class="pricing-per">forever</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="dot"></div> 1 bike</div>
+            <div class="pricing-feature"><div class="dot"></div> Full service history</div>
+            <div class="pricing-feature"><div class="dot"></div> Service & mileage reminders</div>
+            <div class="pricing-feature"><div class="dot"></div> NHTSA recall checks</div>
+            <div class="pricing-feature"><div class="dot"></div> Manual PDF upload</div>
+            <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">iCloud sync</span></div>
+            <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">AI invoice import</span></div>
+            <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">Unlimited bikes</span></div>
+          </div>
+          <a href="#cta" class="pricing-btn outline">Join waitlist</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card featured">
+          <p class="pricing-tier">Premium</p>
+          <p class="pricing-price" style="color:#fff;">$2.99</p>
+          <p class="pricing-per">per month · or $49.99 lifetime</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Everything in Free</span></div>
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Unlimited bikes</span></div>
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">iCloud backup & sync</span></div>
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">AI invoice import</span></div>
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Modification tracker</span></div>
+          </div>
+          <a href="#cta" class="pricing-btn solid">Join waitlist</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-title">Ready to ride<br><span class="highlight">smarter?</span></h2>
+        <p class="cta-sub">Join the waitlist and be the first to know when Riderr launches on iOS.</p>
+
+        <form class="cta-form" id="cta-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
+          <input type="email" name="email" class="cta-input" placeholder="Enter your email" required>
+          <button type="submit" class="cta-btn">Join waitlist</button>
+        </form>
+
+        <div class="cta-success" id="cta-success">
+          <div class="check-circle">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2,6 5,9 10,3"/>
+            </svg>
+          </div>
+          You're on the list — we'll be in touch!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <span>&copy; 2026 Riderr</span>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="support.html">Support</a>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Riderr. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="support.html">Support</a>
+          <a href="mailto:bjoeypelicano@gmail.com">Contact</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script>
-    document.getElementById('waitlist-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('button');
-      btn.textContent = 'Joining...';
-      btn.disabled = true;
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          form.style.display = 'none';
-          const msg = document.getElementById('success-msg');
-          msg.style.display = 'flex';
-        } else {
+    function setupForm(formId, successId) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = form.querySelector('button');
+        btn.textContent = 'Joining...';
+        btn.disabled = true;
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById(successId).style.display = 'flex';
+          } else {
+            btn.textContent = 'Join waitlist';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again.');
+          }
+        } catch {
           btn.textContent = 'Join waitlist';
           btn.disabled = false;
           alert('Something went wrong. Please try again.');
         }
-      } catch (err) {
-        btn.textContent = 'Join waitlist';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again.');
-      }
-    });
+      });
+    }
+
+    setupForm('hero-form', 'hero-success');
+    setupForm('cta-form', 'cta-success');
   </script>
 
 </body>
