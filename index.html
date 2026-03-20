@@ -468,9 +468,9 @@
 
     .pricing-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -725,7 +725,7 @@
       .cta-title { font-size: 36px; }
 
       .feature-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
 
       .form-row, .cta-form { flex-direction: column; }
       .footer-inner { flex-direction: column; gap: 16px; }
@@ -923,11 +923,28 @@
           <a href="#" class="pricing-btn outline">Download Free</a>
         </div>
 
-        <!-- Premium -->
+        <!-- Monthly -->
+        <div class="pricing-card">
+          <p class="pricing-tier">Premium Monthly</p>
+          <p class="pricing-price">$2.99</p>
+          <p class="pricing-per">per month</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="dot"></div> Everything in Free</div>
+            <div class="pricing-feature"><div class="dot"></div> Unlimited bikes</div>
+            <div class="pricing-feature"><div class="dot"></div> iCloud backup & sync</div>
+            <div class="pricing-feature"><div class="dot"></div> AI invoice import</div>
+            <div class="pricing-feature"><div class="dot"></div> Modification tracker</div>
+            <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">Cancel anytime</span></div>
+          </div>
+          <a href="#" class="pricing-btn outline">Get Monthly</a>
+        </div>
+
+        <!-- Lifetime -->
         <div class="pricing-card featured">
-          <p class="pricing-tier">Premium</p>
-          <p class="pricing-price" style="color:#fff;">$2.99</p>
-          <p class="pricing-per">per month · or $49.99 lifetime</p>
+          <p class="pricing-tier">Premium Lifetime</p>
+          <p class="pricing-price" style="color:#fff;">$49.99</p>
+          <p class="pricing-per">one-time purchase</p>
           <div class="pricing-divider"></div>
           <div class="pricing-features">
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Everything in Free</span></div>
@@ -935,8 +952,9 @@
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">iCloud backup & sync</span></div>
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">AI invoice import</span></div>
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Modification tracker</span></div>
+            <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">All future updates</span></div>
           </div>
-          <a href="#" class="pricing-btn solid">Get Premium</a>
+          <a href="#" class="pricing-btn solid">Get Lifetime</a>
         </div>
 
       </div>
