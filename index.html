@@ -702,7 +702,7 @@
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="support.html">Support</a>
-      <a href="#cta" class="nav-cta">Join waitlist</a>
+      <a href="waitlist.html" class="nav-cta">Join waitlist</a>
     </div>
   </nav>
 
@@ -721,20 +721,7 @@
 
           <p class="hero-sub">Never miss an oil change, chain service, or tire rotation again. Track your full service history and get reminded when it matters.</p>
 
-          <div class="form-wrap">
-            <form class="form-row" id="hero-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
-              <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-              <button type="submit" class="submit-btn">Join waitlist</button>
-            </form>
-            <div class="success-msg" id="hero-success">
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="2,6 5,9 10,3"/>
-                </svg>
-              </div>
-              You're on the list — we'll be in touch!
-            </div>
-          </div>
+          <a href="waitlist.html" class="submit-btn" style="display:inline-block; text-decoration:none; text-align:center; max-width:200px;">Join waitlist</a>
 
           <a href="https://twitter.com/riderr" class="follow-link">
             Follow @riderr for updates
@@ -883,7 +870,7 @@
             <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">AI invoice import</span></div>
             <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">Unlimited bikes</span></div>
           </div>
-          <a href="#cta" class="pricing-btn outline">Join waitlist</a>
+          <a href="waitlist.html" class="pricing-btn outline">Join waitlist</a>
         </div>
 
         <!-- Premium -->
@@ -899,7 +886,7 @@
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">AI invoice import</span></div>
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Modification tracker</span></div>
           </div>
-          <a href="#cta" class="pricing-btn solid">Join waitlist</a>
+          <a href="waitlist.html" class="pricing-btn solid">Join waitlist</a>
         </div>
 
       </div>
@@ -913,19 +900,7 @@
         <h2 class="cta-title">Ready to ride<br><span class="highlight">smarter?</span></h2>
         <p class="cta-sub">Join the waitlist and be the first to know when Riderr launches on iOS.</p>
 
-        <form class="cta-form" id="cta-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
-          <input type="email" name="email" class="cta-input" placeholder="Enter your email" required>
-          <button type="submit" class="cta-btn">Join waitlist</button>
-        </form>
-
-        <div class="cta-success" id="cta-success">
-          <div class="check-circle">
-            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="2,6 5,9 10,3"/>
-            </svg>
-          </div>
-          You're on the list — we'll be in touch!
-        </div>
+        <a href="waitlist.html" class="cta-btn" style="text-decoration:none; display:inline-block; padding: 16px 36px; font-size:16px;">Join the waitlist</a>
       </div>
     </div>
   </section>
@@ -944,40 +919,6 @@
     </div>
   </footer>
 
-  <script>
-    function setupForm(formId, successId) {
-      const form = document.getElementById(formId);
-      if (!form) return;
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const btn = form.querySelector('button');
-        btn.textContent = 'Joining...';
-        btn.disabled = true;
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          });
-          if (res.ok) {
-            form.style.display = 'none';
-            document.getElementById(successId).style.display = 'flex';
-          } else {
-            btn.textContent = 'Join waitlist';
-            btn.disabled = false;
-            alert('Something went wrong. Please try again.');
-          }
-        } catch {
-          btn.textContent = 'Join waitlist';
-          btn.disabled = false;
-          alert('Something went wrong. Please try again.');
-        }
-      });
-    }
-
-    setupForm('hero-form', 'hero-success');
-    setupForm('cta-form', 'cta-success');
-  </script>
 
 </body>
 </html>
