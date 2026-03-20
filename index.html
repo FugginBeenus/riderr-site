@@ -229,16 +229,16 @@
     .appstore-btn {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      background: var(--black);
+      gap: 10px;
+      background: var(--green);
       color: white;
-      padding: 13px 22px;
-      border-radius: 14px;
+      padding: 12px 22px;
+      border-radius: 50px;
       text-decoration: none;
       transition: background 0.2s, transform 0.1s;
     }
 
-    .appstore-btn:hover { background: #2a2a2a; transform: scale(1.02); }
+    .appstore-btn:hover { background: var(--green-dark); transform: scale(1.02); }
     .appstore-btn:active { transform: scale(0.98); }
 
     .appstore-text {
@@ -248,24 +248,24 @@
     }
 
     .appstore-small {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 400;
-      opacity: 0.75;
+      opacity: 0.85;
       letter-spacing: 0.01em;
     }
 
     .appstore-large {
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
 
     .appstore-btn-large {
-      padding: 16px 28px;
+      padding: 15px 28px;
     }
 
-    .appstore-btn-large .appstore-small { font-size: 12px; }
-    .appstore-btn-large .appstore-large { font-size: 22px; }
+    .appstore-btn-large .appstore-small { font-size: 11px; }
+    .appstore-btn-large .appstore-large { font-size: 20px; }
 
     .follow-link {
       display: inline-flex;
@@ -773,15 +773,6 @@
             </div>
           </a>
 
-          <a href="https://twitter.com/riderr" class="follow-link">
-            Follow @riderr for updates
-            <span class="arrow">
-              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="2" y1="7" x2="12" y2="7"/>
-                <polyline points="8,3 12,7 8,11"/>
-              </svg>
-            </span>
-          </a>
         </div>
 
         <div class="hero-right">
@@ -935,7 +926,7 @@
             <div class="pricing-feature"><div class="dot"></div> iCloud backup & sync</div>
             <div class="pricing-feature"><div class="dot"></div> AI invoice import</div>
             <div class="pricing-feature"><div class="dot"></div> Modification tracker</div>
-            <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">Cancel anytime</span></div>
+            <div class="pricing-feature"><div class="dot"></div> Cancel anytime</div>
           </div>
           <a href="#" class="pricing-btn outline">Get Monthly</a>
         </div>
