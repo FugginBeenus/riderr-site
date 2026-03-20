@@ -225,6 +225,48 @@
 
     .check-circle svg { width: 12px; height: 12px; }
 
+    /* App Store button */
+    .appstore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--black);
+      color: white;
+      padding: 13px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .appstore-btn:hover { background: #2a2a2a; transform: scale(1.02); }
+    .appstore-btn:active { transform: scale(0.98); }
+
+    .appstore-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .appstore-small {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.75;
+      letter-spacing: 0.01em;
+    }
+
+    .appstore-large {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .appstore-btn-large {
+      padding: 16px 28px;
+    }
+
+    .appstore-btn-large .appstore-small { font-size: 12px; }
+    .appstore-btn-large .appstore-large { font-size: 22px; }
+
     .follow-link {
       display: inline-flex;
       align-items: center;
@@ -702,7 +744,7 @@
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="support.html">Support</a>
-      <a href="waitlist.html" class="nav-cta">Join waitlist</a>
+      <a href="#" class="nav-cta">Download on iOS</a>
     </div>
   </nav>
 
@@ -721,7 +763,15 @@
 
           <p class="hero-sub">Never miss an oil change, chain service, or tire rotation again. Track your full service history and get reminded when it matters.</p>
 
-          <a href="waitlist.html" class="submit-btn" style="display:inline-block; text-decoration:none; text-align:center; max-width:200px;">Join waitlist</a>
+          <a href="#" class="appstore-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.05 13.77c-.03-3.16 2.58-4.68 2.7-4.75-1.47-2.15-3.76-2.45-4.57-2.48-1.94-.2-3.8 1.15-4.78 1.15-.99 0-2.51-1.13-4.13-1.1-2.12.03-4.08 1.24-5.17 3.13-2.21 3.84-.57 9.52 1.58 12.63 1.06 1.52 2.31 3.23 3.96 3.17 1.59-.07 2.19-1.02 4.11-1.02 1.91 0 2.46 1.02 4.14.98 1.71-.03 2.79-1.55 3.83-3.08 1.22-1.76 1.71-3.48 1.74-3.57-.04-.02-3.38-1.3-3.41-5.06zM14.9 4.3C15.78 3.22 16.37 1.73 16.2.22c-1.3.06-2.9.88-3.82 1.94-.83.94-1.57 2.46-1.38 3.9 1.46.11 2.95-.74 3.9-1.76z"/>
+            </svg>
+            <div class="appstore-text">
+              <span class="appstore-small">Download on the</span>
+              <span class="appstore-large">App Store</span>
+            </div>
+          </a>
 
           <a href="https://twitter.com/riderr" class="follow-link">
             Follow @riderr for updates
@@ -870,7 +920,7 @@
             <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">AI invoice import</span></div>
             <div class="pricing-feature"><div class="dot muted"></div> <span style="color:#bbb;">Unlimited bikes</span></div>
           </div>
-          <a href="waitlist.html" class="pricing-btn outline">Join waitlist</a>
+          <a href="#" class="pricing-btn outline">Download Free</a>
         </div>
 
         <!-- Premium -->
@@ -886,7 +936,7 @@
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">AI invoice import</span></div>
             <div class="pricing-feature"><div class="dot"></div> <span style="color:#fff;">Modification tracker</span></div>
           </div>
-          <a href="waitlist.html" class="pricing-btn solid">Join waitlist</a>
+          <a href="#" class="pricing-btn solid">Get Premium</a>
         </div>
 
       </div>
@@ -898,9 +948,17 @@
     <div class="container">
       <div class="cta-inner">
         <h2 class="cta-title">Ready to ride<br><span class="highlight">smarter?</span></h2>
-        <p class="cta-sub">Join the waitlist and be the first to know when Riderr launches on iOS.</p>
+        <p class="cta-sub">Download Riderr free on iOS. Upgrade to Premium whenever you're ready.</p>
 
-        <a href="waitlist.html" class="cta-btn" style="text-decoration:none; display:inline-block; padding: 16px 36px; font-size:16px;">Join the waitlist</a>
+        <a href="#" class="appstore-btn appstore-btn-large">
+          <svg width="26" height="30" viewBox="0 0 22 26" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.05 13.77c-.03-3.16 2.58-4.68 2.7-4.75-1.47-2.15-3.76-2.45-4.57-2.48-1.94-.2-3.8 1.15-4.78 1.15-.99 0-2.51-1.13-4.13-1.1-2.12.03-4.08 1.24-5.17 3.13-2.21 3.84-.57 9.52 1.58 12.63 1.06 1.52 2.31 3.23 3.96 3.17 1.59-.07 2.19-1.02 4.11-1.02 1.91 0 2.46 1.02 4.14.98 1.71-.03 2.79-1.55 3.83-3.08 1.22-1.76 1.71-3.48 1.74-3.57-.04-.02-3.38-1.3-3.41-5.06zM14.9 4.3C15.78 3.22 16.37 1.73 16.2.22c-1.3.06-2.9.88-3.82 1.94-.83.94-1.57 2.46-1.38 3.9 1.46.11 2.95-.74 3.9-1.76z"/>
+          </svg>
+          <div class="appstore-text">
+            <span class="appstore-small">Download on the</span>
+            <span class="appstore-large">App Store</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
