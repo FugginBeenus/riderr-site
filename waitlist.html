@@ -222,7 +222,7 @@
           <p class="subtitle">Never miss an oil change, chain service, or tire rotation again. Track your full service history and get reminded when it matters.</p>
 
           <div class="form-wrap">
-            <form class="form-row" id="waitlist-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
+            <form class="form-row" id="waitlist-form">
               <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
               <button type="submit" class="submit-btn">Join waitlist</button>
             </form>
@@ -256,15 +256,24 @@
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('button');
+      const email = form.querySelector('input[type="email"]').value;
       btn.textContent = 'Joining...';
       btn.disabled = true;
       try {
-        const res = await fetch(form.action, {
+        const res = await fetch('https://emailoctopus.com/api/1.6/lists/4eff77dc-29e1-11f1-925c-c5c42f3291c1/contacts', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            api_key: 'eo_3b82a1576540824a929fae44f374232bf983cb771141cfe9daaec517e0f17a07',
+            email_address: email,
+            status: 'SUBSCRIBED'
+          })
         });
-        if (res.ok) {
+        const data = await res.json();
+        if (res.ok || data.email_address) {
+          form.style.display = 'none';
+          document.getElementById('success-msg').style.display = 'flex';
+        } else if (data.error && data.error.code === 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
           form.style.display = 'none';
           document.getElementById('success-msg').style.display = 'flex';
         } else {
